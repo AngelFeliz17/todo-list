@@ -1,9 +1,12 @@
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, HTTPException, Body, UploadFile, File
 from pydantic import BaseModel
 from typing import Optional
 
 from setting_db import create_db_and_tables, Tasks, SessionDep
 from sqlmodel import select
+
+import cloudinary.uploader
+from config.cloudinary_config import cloudinary
 
 app = FastAPI()
 
@@ -56,3 +59,12 @@ def updateTask(task_id: int, session: SessionDep, task_update: dict = Body(...))
     session.commit()
     session.refresh(task)
     return task
+
+@app.post("/upload/")
+async def upload_file(file: UploadFile = File(...)):
+    try:
+        # Upload file directly to Cloudinary
+        result = cloudinary.uploader.upload(file.file, folder="my_todo_app")
+        return {"url": result["secure_url"]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
