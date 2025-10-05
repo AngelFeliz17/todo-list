@@ -20,8 +20,6 @@ function App() {
   const [task, setTask] = useState('')
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [editingId, setEditingId] = useState<number | null>(null)
-  const [editText, setEditText] = useState('')
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
   const [searchTerm, setSearchTerm] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -41,21 +39,6 @@ function App() {
   useEffect(() => {
     setCurrentPage(1)
   }, [searchTerm, filter])
-
-  const saveEdit = () => {
-    if (editText.trim() !== '') {
-      setTodos(todos.map(todo => 
-        todo.id === editingId ? { ...todo, text: editText.trim() } : todo
-      ))
-      setEditingId(null)
-      setEditText('')
-    }
-  }
-
-  const cancelEdit = () => {
-    setEditingId(null)
-    setEditText('')
-  }
 
   const filteredTodos = todos.filter(todo => {
     // Search filter
