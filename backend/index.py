@@ -8,13 +8,22 @@ from sqlmodel import select
 import cloudinary.uploader
 from config.cloudinary_config import cloudinary
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
 
-@app.get("/tasks/")
+@app.get("/tasks")
 def readTasks(session: SessionDep) -> list[Tasks]:
     tasks = session.exec(select(Tasks)).all()
     return tasks
@@ -60,7 +69,7 @@ def updateTask(task_id: int, session: SessionDep, task_update: dict = Body(...))
     session.refresh(task)
     return task
 
-@app.post("/upload/")
+@app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     try:
         # Upload file directly to Cloudinary

@@ -7,6 +7,7 @@ class Tasks(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     task: str | None = Field(index=True)
     pic: Optional[str] = None
+    date: Optional[str] = None
     is_done: bool = False
     
 sqlite_file_name = "database.db"

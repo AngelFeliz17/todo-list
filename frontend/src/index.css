@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input + input,
+input + button,
+div + button,
+div + div {
+  margin-top: 0.4rem; /* same as Tailwind space-y-3 */
+}
