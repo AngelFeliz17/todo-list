@@ -6,3 +6,6 @@ cloudinary==1.41.0
 pydantic==2.8.2
 typing-extensions==4.12.2
 psycopg2-binary
+python-multipart
+typing_extensions
+requests
