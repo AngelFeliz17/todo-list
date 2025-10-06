@@ -357,7 +357,7 @@ function App() {
                     >
                       {todo.task}
                     </span>
-                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <div className="flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
                       <button
                         onClick={() => openEditModal(todo)}
                         className="px-3 py-1 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-sm"
@@ -568,7 +568,7 @@ function App() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-3 pt-3">
+              <div className="flex gap-3 pt-3 ">
                 <button
                   onClick={closeEditModal}
                   className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all duration-200"
@@ -578,7 +578,8 @@ function App() {
                     color: '#374151',
                     borderRadius: '0.5rem',
                     border: 'none',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    marginRight: '0.4rem'
                   }}
                 >
                   Cancel
