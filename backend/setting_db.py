@@ -4,8 +4,11 @@ from sqlmodel import Field, Session, SQLModel, create_engine
 import os
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+
 if DATABASE_URL:
-    engine = create_engine(DATABASE_URL)
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+pg8000://", 1)
+    engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 else:
     sqlite_file_name = "database.db"
     sqlite_url = f"sqlite:///{sqlite_file_name}"
@@ -20,12 +23,10 @@ class Tasks(SQLModel, table=True):
     is_done: bool = False
 
 def create_db_and_tables():
-    """Crea las tablas si no existen."""
     SQLModel.metadata.create_all(engine)
 
 def get_session() -> Session:
-    """Devuelve una sesión de DB para usar con Depends."""
     with Session(engine) as session:
         yield session
 
-SessionDep: Annotated[Session, Depends] = Annotated[Session, Depends(get_session)]
+SessionDep = Annotated[Session, Depends(get_session)]
