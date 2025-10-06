@@ -6,7 +6,7 @@ from backend.setting_db import create_db_and_tables, Tasks, SessionDep
 from sqlmodel import select
 
 import cloudinary.uploader
-from config.cloudinary_config import cloudinary
+from backend.config.cloudinary_config import cloudinary
 
 from fastapi.middleware.cors import CORSMiddleware
 
