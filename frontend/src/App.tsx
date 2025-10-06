@@ -23,6 +23,10 @@ function App() {
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
   const [searchTerm, setSearchTerm] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
+  });
   
   // Edit modal states
   const [showEditModal, setShowEditModal] = useState(false)
@@ -60,7 +64,7 @@ function App() {
   const paginatedTodos = filteredTodos.slice(startIndex, endIndex)
 
   const getTasks = async () => {
-    await axios.get('http://127.0.0.1:8000/tasks').then((res) => {
+    await api.get('/tasks').then((res) => {
       setTodos(res.data)
     })
   }
@@ -76,8 +80,8 @@ function App() {
           const formData = new FormData();
           formData.append("file", selectedFile); // Filename
   
-          const uploadRes = await axios.post(
-            "http://127.0.0.1:8000/upload",
+          const uploadRes = await api.post(
+            "/upload",
             formData,
             { headers: { "Content-Type": "multipart/form-data" } }
           );
@@ -94,7 +98,7 @@ function App() {
         };
   
         // Post task to backend
-        await axios.post( "http://127.0.0.1:8000/tasks", newTask).then(() => {
+        await api.post( "/tasks", newTask).then(() => {
           getTasks();
         });
       } catch (error) {
@@ -112,7 +116,7 @@ function App() {
   };
 
   const deleteTask = async (id: number) => {
-    await axios.delete("http://127.0.0.1:8000/tasks/" + id).then(() => {
+    await api.delete("/tasks/" + id).then(() => {
       getTasks();
     })
   }
@@ -127,7 +131,7 @@ function App() {
         is_done: !task.is_done,
       };
   
-      await axios.put(`http://127.0.0.1:8000/tasks/${id}`, taskData);
+      await api.put(`/tasks/${id}`, taskData);
   
       getTasks();
     } catch (error) {
@@ -170,8 +174,8 @@ function App() {
         const formData = new FormData();
         formData.append("file", editTaskFile);
 
-        const uploadRes = await axios.post(
-          "http://127.0.0.1:8000/upload",
+        const uploadRes = await api.post(
+          "/upload",
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -188,7 +192,7 @@ function App() {
       };
 
       // Update task in backend
-      await axios.put(`http://127.0.0.1:8000/tasks/${editingTodo.id}`, updatedTaskData);
+      await api.put(`/tasks/${editingTodo.id}`, updatedTaskData);
 
       // Refresh tasks and close modal
       getTasks();
