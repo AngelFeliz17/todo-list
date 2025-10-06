@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Body, UploadFile, File
 from pydantic import BaseModel
 from typing import Optional
 
-from setting_db import create_db_and_tables, Tasks, SessionDep
+from backend.setting_db import create_db_and_tables, Tasks, SessionDep
 from sqlmodel import select
 
 import cloudinary.uploader
