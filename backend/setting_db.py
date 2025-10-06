@@ -6,8 +6,10 @@ import os
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
+    # Render provides DATABASE_URL with "postgres://"
     if DATABASE_URL.startswith("postgres://"):
-        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+pg8000://", 1)
+        # Use psycopg2 for best compatibility
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
     engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 else:
     sqlite_file_name = "database.db"
