@@ -30,7 +30,6 @@ pyasn1==0.6.1
 pyasn1_modules==0.4.1
 pycparser==2.22
 pycryptodome==3.21.0
-pydantic_core==2.14.6
 pyparsing==3.2.1
 Pyrebase4==4.8.0
 python-jwt==4.1.0
