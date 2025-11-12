@@ -211,7 +211,7 @@ function App() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2" style={{fontSize: '1.875rem', fontWeight: 'bold', background: 'linear-gradient(90deg, #7c3aed 0%, #2563eb 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '0.5rem'}}>
-            ✨ Todo List
+            Todo List
           </h1>
           <p className="text-gray-500 text-sm" style={{color: '#6b7280', fontSize: '0.875rem'}}>
             Stay organized and productive
@@ -246,9 +246,9 @@ function App() {
                 className="px-4 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-purple-300 shadow-lg"
                 style={{padding: '0.75rem 1rem', marginLeft: '0.4rem', background: 'linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%)', color: 'white', borderRadius: '0.75rem', border: 'none', boxShadow: '0 10px 15px -3px rgba(124, 58, 237, 0.3)', minWidth: '140px'}}
               >
-                <option value="all">📋 All Tasks</option>
-                <option value="active">⏳ Active</option>
-                <option value="completed">✅ Completed</option>
+                <option value="all">All Tasks</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
               </select>
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                 <svg className="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -266,7 +266,7 @@ function App() {
               type="text"
               value={task}
               onChange={(e) => setTask(e.target.value)}
-              placeholder="✨ What needs to be done?"
+              placeholder="What needs to be done?"
               className="w-full px-4 py-3 bg-white text-gray-800 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
               style={{padding: '0.75rem 1rem', backgroundColor: 'white', color: '#1f2937', border: '1px solid #e5e7eb', borderRadius: '0.5rem', boxSizing: 'border-box'}}
             />
@@ -291,7 +291,7 @@ function App() {
               className="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
               style={{padding: '0.75rem 1rem', background: 'linear-gradient(90deg, #7c3aed 0%, #2563eb 100%)', color: 'white', borderRadius: '0.5rem', border: 'none', cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(124, 58, 237, 0.3)'}}
             >
-              {isPosting ? 'Posting…' : '🚀 Add Task'}
+              {isPosting ? 'Posting…' : 'Add Task'}
             </button>
           </div>
         </div>
@@ -300,7 +300,7 @@ function App() {
         <div className="space-y-3 flex flex-col">
           {filteredTodos.length === 0 ? (
             <div className="text-center py-12">
-              <div className="text-6xl mb-4">📝</div>
+              <div className="text-3xl mb-4 font-semibold text-gray-300">No Tasks</div>
               <p className="text-gray-500 text-lg mb-2" style={{color: '#6b7280', fontSize: '1.125rem', marginBottom: '0.5rem'}}>
                 {todos.length === 0 ? 'No tasks yet!' : 'No tasks match your search.'}
               </p>
@@ -363,14 +363,14 @@ function App() {
                         className="px-3 py-1 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-sm"
                         style={{padding: '0.25rem 0.75rem', color: '#2563eb', backgroundColor: 'transparent', border: 'none', borderRadius: '0.5rem', cursor: 'pointer', fontSize: '0.875rem'}}
                       >
-                        ✏️ Edit
+                        Edit
                       </button>
                       <button
                         onClick={() => deleteTask(todo.id)}
                         className="px-3 py-1 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-sm"
                         style={{padding: '0.25rem 0.75rem', color: '#dc2626', backgroundColor: 'transparent', border: 'none', borderRadius: '0.5rem', cursor: 'pointer', fontSize: '0.875rem'}}
                       >
-                        🗑️ Delete
+                        Delete
                       </button>
                     </div>
                   </>
@@ -465,7 +465,7 @@ function App() {
             {/* Modal Header */}
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                ✏️ Edit Task
+                Edit Task
               </h2>
               <button
                 onClick={closeEditModal}
